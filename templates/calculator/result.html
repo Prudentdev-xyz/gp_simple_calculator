@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% block title %}Result — GP Calculator{% endblock %}
+{% block content %}
+
+<nav class="navbar">
+  <a href="{% url 'landing' %}" class="navbar-brand">GP CALCULATOR</a>
+  <div class="navbar-links">
+    <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>
+  </div>
+</nav>
+
+<div class="result-container">
+  <div class="gp-display">
+    <p>Your Grade Point</p>
+    <div class="gp-value">{{ result.gp }}</div>
+    <div class="gp-class">{{ result.degree_class }}</div>
+  </div>
+
+  <div style="overflow-x: auto">
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Course Code</th>
+          <th>Credit Unit</th>
+          <th>Score</th>
+          <th>Grade</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ course.course_code }}</td>
+          <td>{{ course.credit_unit }}</td>
+          <td>{{ course.score }}</td>
+          <td class="green">{{ course.grade_letter }}</td>
+          <td class="green">{{ course.grade_point }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="result-summary">
+    <p>Total Units: <span>{{ result.total_units }}</span></p>
+    <p>Total Grade Points: <span>{{ result.total_grade_points }}</span></p>
+    <p>GP: <span class="highlight">{{ result.gp }}</span></p>
+    <p>Class of Degree: <span>{{ result.degree_class }}</span></p>
+  </div>
+
+  <div class="result-buttons">
+    <a
+      href="{% url 'calculate' %}"
+      class="btn btn-outline"
+      style="flex: 1; text-align: center"
+    >
+      Calculate Again
+    </a>
+    <a
+      href="{% url 'download_pdf' result.id %}"
+      class="btn btn-primary"
+      style="flex: 1; text-align: center"
+    >
+      Download PDF
+    </a>
+  </div>
+</div>
+
+{% endblock %}

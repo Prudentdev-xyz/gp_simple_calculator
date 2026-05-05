@@ -1,0 +1,82 @@
+{% extends 'base.html' %} 
+{% block title %}Sign Up — GP Calculator{% endblock %}
+{% block content %}
+
+<nav class="navbar">
+  <a href="{% url 'landing' %}" class="navbar-brand">GP CALCULATOR</a>
+</nav>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">Create Account</h2>
+    <p class="auth-subtitle">Join and start calculating your GP</p>
+
+    {% if messages %} {% for message in messages %}
+    <div class="message {{ message.tags }}" style="margin-bottom: 16px">
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %}
+
+    <form method="POST" action="{% url 'signup' %}">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-input"
+          placeholder="e.g. John Doe"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-input"
+          placeholder="e.g. john@email.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          name="password1"
+          class="form-input"
+          placeholder="Enter password"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          name="password2"
+          class="form-input"
+          placeholder="Confirm password"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        style="width: 100%; margin-top: 8px; padding: 14px"
+      >
+        Create Account
+      </button>
+    </form>
+
+    <div class="auth-switch">
+      Already have an account? <a href="{% url 'login' %}">Login</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

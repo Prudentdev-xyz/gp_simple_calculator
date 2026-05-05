@@ -1,0 +1,154 @@
+{% extends 'base.html' %} 
+{% block title %}Calculate GP — GPCalculator{%endblock %} 
+{% block content %}
+
+<nav class="navbar">
+  <a href="{% url 'landing' %}" class="navbar-brand">GP CALCULATOR</a>
+  <div class="navbar-links">
+    <a href="{% url 'logout' %}" class="btn btn-outline">Logout</a>
+  </div>
+</nav>
+
+<div class="calc-container">
+  <h2 class="calc-title">Calculate Your GP</h2>
+  <p class="calc-subtitle">Enter your courses and scores below</p>
+
+  {% if messages %} {% for message in messages %}
+  <div class="message {{ message.tags }}" style="margin-bottom: 16px">
+    {{ message }}
+  </div>
+  {% endfor %} {% endif %}
+
+  <!-- Step 1 — Number of courses -->
+  <div id="step1">
+    <div class="form-group">
+      <label class="form-label">How many courses?</label>
+      <input
+        type="number"
+        id="num-courses-input"
+        class="form-input"
+        placeholder="e.g. 8"
+        min="1"
+        max="20"
+        style="max-width: 200px"
+      />
+    </div>
+    <button
+      onclick="generateRows()"
+      class="btn btn-primary"
+      style="margin-top: 8px"
+    >
+      Generate Courses
+    </button>
+  </div>
+
+  <!-- Step 2 — Course rows -->
+  <form
+    method="POST"
+    action="{% url 'calculate' %}"
+    id="course-form"
+    style="margin-top: 28px; display: none"
+  >
+    {% csrf_token %}
+    <input type="hidden" name="num_courses" id="num-courses-hidden" />
+
+    <div class="unit-counter">
+      Total Units: <span id="unit-counter">0</span>
+    </div>
+
+    <div class="course-headers">
+      <span>Course Code</span>
+      <span>Credit Unit</span>
+      <span>Score</span>
+    </div>
+
+    <div id="course-rows"></div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      style="width: 100%; margin-top: 1rem; padding: 14px"
+    >
+      Calculate GP
+    </button>
+  </form>
+</div>
+
+<script>
+  function generateRows() {
+    const num = parseInt(document.getElementById("num-courses-input").value);
+    if (!num || num < 1) {
+      alert("Please enter a valid number of courses!");
+      return;
+    }
+
+    document.getElementById("num-courses-hidden").value = num;
+    document.getElementById("course-form").style.display = "block";
+
+    const container = document.getElementById("course-rows");
+    container.innerHTML = "";
+
+    for (let i = 0; i < num; i++) {
+      container.innerHTML += `
+        <div class="course-row">
+          <input type="text" name="course_code_${i}"
+                 class="form-input" placeholder="e.g. CSC201" required />
+          <input type="number" name="credit_unit_${i}"
+                 class="form-input unit-input" placeholder="1-6"
+                 min="1" max="6" required />
+          <input type="number" name="score_${i}"
+                 class="form-input" placeholder="0-100"
+                 min="0" max="100" required />
+        </div>
+      `;
+    }
+
+    updateCounter();
+  }
+
+  function updateCounter() {
+    document.addEventListener("input", function (e) {
+      if (e.target.classList.contains("unit-input")) {
+        let total = 0;
+        document.querySelectorAll(".unit-input").forEach((input) => {
+          const val = parseInt(input.value);
+          if (!isNaN(val)) total += val;
+        });
+        document.getElementById("unit-counter").textContent = total;
+      }
+    });
+  }
+
+  // Validation
+  document.addEventListener("submit", function (e) {
+    if (e.target.id === "course-form") {
+      const rows = document.querySelectorAll(".course-row");
+      let valid = true;
+
+      rows.forEach((row, i) => {
+        const code = row
+          .querySelector('input[name^="course_code"]')
+          .value.trim();
+        const unit = parseInt(
+          row.querySelector('input[name^="credit_unit"]').value,
+        );
+        const score = parseInt(row.querySelector('input[name^="score"]').value);
+
+        if (!code) {
+          alert(`Row ${i + 1}: Course code cannot be empty!`);
+          valid = false;
+        } else if (isNaN(unit) || unit < 1 || unit > 6) {
+          alert(`Row ${i + 1}: Credit unit must be between 1 and 6!`);
+          valid = false;
+        } else if (isNaN(score) || score < 0 || score > 100) {
+          alert(`Row ${i + 1}: Score must be between 0 and 100!`);
+          valid = false;
+        }
+      });
+
+      if (!valid) e.preventDefault();
+    }
+  });
+</script>
+
+{% endblock %}

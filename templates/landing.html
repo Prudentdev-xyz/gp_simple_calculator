@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}GP Calculator{% endblock %} 
+
+{% block content %}
+
+<nav class="navbar">
+  <a href="{% url 'landing' %}" class="navbar-brand">GP CALCULATOR</a>
+  <div class="navbar-links">
+    <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+  </div>
+</nav>
+
+<div class="landing-container">
+
+  <h1 class="landing-title">
+    Your Grades.<br />Your <span>Results.</span><br />Instantly.
+  </h1>
+
+  <p class="landing-subtitle">
+    Enter your course scores and get your GP calculated in seconds. No stress.
+    No confusion. Just results.
+  </p>
+
+  <div class="landing-buttons">
+    <a href="{% url 'signup' %}" class="btn btn-primary">Start Calculating</a>
+    <a href="{% url 'login' %}" class="btn btn-outline">I have an account</a>
+  </div>
+
+  <div class="landing-steps">
+    <div class="step">
+      <span class="step-number">01</span>
+      <p class="step-text">Create an account</p>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step">
+      <span class="step-number">02</span>
+      <p class="step-text">Enter your courses</p>
+    </div>
+    <div class="step-divider"></div>
+    <div class="step">
+      <span class="step-number">03</span>
+      <p class="step-text">Download your result</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
