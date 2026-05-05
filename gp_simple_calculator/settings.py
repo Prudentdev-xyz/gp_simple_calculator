@@ -132,4 +132,7 @@ LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/calculate/'
 TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 CSRF_TRUSTED_ORIGINS = ['https://web-production-ef6f8.up.railway.app']
