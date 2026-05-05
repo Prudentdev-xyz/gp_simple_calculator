@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}GP Calculator{% endblock %} 
+{% block title %}GP Calculator{% endblock %}
 
 {% block content %}
 
 <nav class="navbar">
-  <a href="{% url 'landing' %}" class="navbar-brand">GP CALCULATOR</a>
+  <a href="{% url 'landing' %}" class="navbar-brand">CGPA CALCULATOR</a>
   <div class="navbar-links">
     <a href="{% url 'login' %}" class="btn btn-outline">Login</a>
     <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
@@ -14,36 +14,88 @@
 
 <div class="landing-container">
 
+  <!-- BADGE -->
+  <div class="landing-badge">Grade Point Calculator</div>
+
+  <!-- HERO TITLE -->
   <h1 class="landing-title">
     Your Grades.<br />Your <span>Results.</span><br />Instantly.
   </h1>
 
+  <!-- SUBTITLE -->
   <p class="landing-subtitle">
-    Enter your course scores and get your GP calculated in seconds. No stress.
-    No confusion. Just results.
+    Enter your course scores and get your GP calculated in seconds.
+    No stress, no confusion, just clear, accurate results every time.
   </p>
 
+  <!-- CTA BUTTONS -->
   <div class="landing-buttons">
-    <a href="{% url 'signup' %}" class="btn btn-primary">Start Calculating</a>
-    <a href="{% url 'login' %}" class="btn btn-outline">I have an account</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary btn-lg">Start Calculating</a>
+    <a href="{% url 'login' %}" class="btn btn-outline btn-lg">I have an account</a>
   </div>
 
+  <!-- DIVIDER -->
+  <div class="section-divider"></div>
+
+  <!-- HOW IT WORKS STEPS -->
   <div class="landing-steps">
     <div class="step">
-      <span class="step-number">01</span>
-      <p class="step-text">Create an account</p>
+      <div class="step-circle">01</div>
+      <p class="step-label">Create Account</p>
+      <p class="step-desc">Sign up in seconds, no card required</p>
     </div>
-    <div class="step-divider"></div>
+    <div class="step-connector"></div>
     <div class="step">
-      <span class="step-number">02</span>
-      <p class="step-text">Enter your courses</p>
+      <div class="step-circle">02</div>
+      <p class="step-label">Enter Courses</p>
+      <p class="step-desc">Input your scores and credit units</p>
     </div>
-    <div class="step-divider"></div>
+    <div class="step-connector"></div>
     <div class="step">
-      <span class="step-number">03</span>
-      <p class="step-text">Download your result</p>
+      <div class="step-circle">03</div>
+      <p class="step-label">Get Your GP</p>
+      <p class="step-desc">Download your result instantly</p>
     </div>
   </div>
+
+  <!-- FEATURE CARDS -->
+  <div class="landing-features">
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <p class="feature-title">Instant Calculation</p>
+      <p class="feature-desc">Your GP computed the moment you submit. Zero delay, zero stress.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✓</span>
+      <p class="feature-title">Accurate Results</p>
+      <p class="feature-desc">Follows standard university GPA grading systems precisely.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">↓</span>
+      <p class="feature-title">Downloadable</p>
+      <p class="feature-desc">Save and share your GP result as a file in one click.</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">◷</span>
+      <p class="feature-title">Result History</p>
+      <p class="feature-desc">Access all your past calculations anytime you log back in.</p>
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA STRIP -->
+  <div class="cta-strip">
+    <h2>Ready to know your GP?</h2>
+    <p>
+      Join students already using GP Calc to track their academic performance
+      and stay on top of their grades.
+    </p>
+    <a href="{% url 'signup' %}" class="btn btn-dark btn-lg">Get Started — It's Free</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  &copy; 2025 GP Calc &mdash; Built for students
 </div>
 
 {% endblock %}
