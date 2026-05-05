@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-%^i7hd-(_0qpcofx3%bl+t72o3$l))4(+-q7vt#iffd$di$q%y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gpsimplecalculator-production.up.railway.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
