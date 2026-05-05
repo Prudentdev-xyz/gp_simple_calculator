@@ -28,8 +28,6 @@ SECRET_KEY = 'django-insecure-%^i7hd-(_0qpcofx3%bl+t72o3$l))4(+-q7vt#iffd$di$q%y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['gpsimplecalculator-production.up.railway.app', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -135,4 +133,12 @@ TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-CSRF_TRUSTED_ORIGINS = ['https://web-production-ef6f8.up.railway.app']
+
+ALLOWED_HOSTS = ['gpsimplecalculator-production.up.railway.app', 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gpsimplecalculator-production.up.railway.app',
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
