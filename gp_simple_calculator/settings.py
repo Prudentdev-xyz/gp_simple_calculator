@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%^i7hd-(_0qpcofx3%bl+t72o3$l))4(+-q7vt#iffd$di$q%y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['gpsimplecalculator-production.up.railway.app', 'localhost', '127.0.0.1']
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,3 +131,5 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/calculate/'
 TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
+
+CSRF_TRUSTED_ORIGINS = ['https://web-production-ef6f8.up.railway.app']
